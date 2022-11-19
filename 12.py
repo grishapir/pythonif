@@ -1,3 +1,8 @@
-a=('267318431494285673434')
-b=('345')
-print (a<=b)
+parol = input("Введите пароль\n")
+def MyFunc(parol):
+    for num in ['!','+','-','*','_']:
+        for elem in str(parol):
+            if num == elem:
+                print("Неконкретный пароль")
+parol = input ("Введите пароль\n")
+MyFunc(parol)
