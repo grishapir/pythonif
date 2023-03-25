@@ -1,97 +1,66 @@
-pole = [["-","-","-","-","-","-","-","-"],
-        [":","*","*","*","*","*","*","-"],
-        ["-","*","!","*","!","*","*","-"],
-        ["-","!","*","*","!","*","*","-"],
-        ["-","*","*","*","*","*","*","-"],
-        ["-","!","!","*","!","*","*","-"],
-        ["-","*","*","*","!","*","*","-"],
-        ["-","*","*","*","+","*","*","-"],
-        ["-","-","-","-","-","-","-","-"]]
-a = 7
-b = 4
-pole[a][b] = "+"
+'''
+Это программа Эргуария. Он решил сделать бродилку,
+в которой звёздочка может путешествовать по полю.
+Только почему-то она странно себя ведёт, если
+попытаться пройти сквозь стену.
+
+Звёздочка должна просто оставаться на месте,
+ходить сквозь стены она не может,
+но она то телепортируется вообще в другое место поля,
+то выдаёт ошибку. 
+
+'''
+
+
+pole = [['-', '-', '-', '-', '-', '-', '-'],
+        ['-', 'O', 'O', 'O', 'O', 'O', '-'],
+        ['-', 'O', 'O', 'O', 'O', 'O', '-'],
+        ['-', 'O', 'O', 'O', 'O', 'O', '-'],
+        ['-', 'O', 'O', '*', 'O', 'O', '-'],
+        ['-', 'O', 'O', 'O', 'O', 'O', '-'],
+        ['-', 'O', 'O', 'O', 'O', 'O', '-'],
+        ['-', '-', '-', '-', '-', '-', '-'], ]
+
+x = 3
+y = 4
+
 for stroka in pole:
-    for kletka in stroka:
-        print(kletka,end =" ")
+    for kvadr in stroka:
+        print(kvadr, end = ' ')
     print()
-while True:
-    d = input("куды пойдешь: направо, налево, вверх, вниз")
-    while d != "направо" and d != "налево" and d != "вверх" and d != "вниз":
-        input("куды пойдешь: направо, налево, вверх, вниз")
-    if d == "направо":
-        if pole[a][b+1] == "-":
-            print("Так не возможнно")
-        elif pole[a][b+1] == "!":
-            pole[a][b] = "*"
-            print("и так не возможно")
-            a = 7
-            b = 4
-            for stroka in pole:
-                for kletka in stroka:
-                    print(kletka,end =" ")
-                print()
+command = input("Введи команду: ")
+while command != "стоп":
+    if command == "пр":
+        if pole[y][x+1] == "-":
+            print("Так невозможно")
         else:
-            pole[a][b] = "*"
-            b+=1
-            pole[a][b] = "+"
-            for stroka in pole:
-                for kletka in stroka:
-                    print(kletka,end =" ")
-                print()
-    if d == "налево":
-        if pole[a][b-1] == "-":
-            print("Так не возможнно")
-        elif pole[a][b-1] == "!":
-            pole[a][b] = "*"
-            print("и так не возможно")
-            a = 7
-            b = 4
-            for stroka in pole:
-                for kletka in stroka:
-                    print(kletka,end =" ")
-                print()
+            pole[y][x] = "O"
+            x = x + 1
+            pole[y][x] = "*"
+    elif command == "лв":
+        if pole[y][x-1] == "-":
+            print("Так невозможно")
         else:
-            pole[a][b] = "*"
-            b-=1
-            pole[a][b] = "+"
-            for stroka in pole:
-                for kletka in stroka:
-                    print(kletka,end =" ")
-                print()
-    if d == "вниз":
-        if pole[a+1][b] == "-":
-            print("Так не возможнно")
-        elif pole[a+1][b] == "!":
-            pole[a][b] = "*"
-            print("и так не возможно")
-            a = 7
-            b = 4
-        else:
-            pole[a][b] = "*"
-            a+=1
-            pole[a][b] = "+"
-            for stroka in pole:
-                for kletka in stroka:
-                    print(kletka,end =" ")
-                print()
-    if d == "вверх":
-        if pole[a-1][b] == "-":
-            print("Так не возможнно")
-        elif pole[a-1][b] == "!":
-            pole[a][b] = "*"
-            print("и так не возможно")
-            a = 7
-            b = 4
-        else:
-            pole[a][b] = "*"
-            a-=1
-            pole[a][b] = "+"
-            for stroka in pole:
-                for kletka in stroka:
-                    print(kletka,end =" ")
-                print()
-    if a == 1 and b == 0:
-        print('Ты победил')
-        a = 7
-        b = 4
-        break
+            pole[y][x] = "O"
+            x = x - 1
+            pole[y][x] = "*"
+
+    elif command == "вх":
+        pole[y][x] = "O"
+        y = y - 1
+        pole[y][x] = "*"
+        if pole[y-1][x] == "-":
+            print("Так невозможно")
+    elif command == "нз":
+        pole[y][x] = "O"
+        y = y + 1
+        pole[y][x] = "*"
+        if pole[y+1][x] == "-":
+            print("Так невозможно")
+    else:
+        print("Не понял...")
+    for stroka in pole:
+        for kvadr in stroka:
+            print(kvadr, end = ' ')
+        print()
+    command = input("Введи команду: ")
