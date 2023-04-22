@@ -1,0 +1,5 @@
+f = open('text.txt', 'r')
+a = f.readline()
+s = f.readline()
+sum = int(a) + int(s)
+print(sum)
